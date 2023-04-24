@@ -23,6 +23,7 @@ const choices = {
 
 let playerScoreNumber = 0;
 let computerScoreNumber = 0;
+let consecutiveWins = 0;
 let computerChoice = ''; // computer choice
 
 // console.log(allGameIcons);
@@ -57,7 +58,7 @@ function computerRandomChoice() {
   } else {
     computerChoice = 'scissors';
   }
-  console.log(computerChoice);
+  // console.log(computerChoice);
 }
 
 // Check result, increase scores, update resultText
@@ -69,13 +70,19 @@ function updateScore(playerChoice) {
     const choice = choices[playerChoice];
     // console.log(choice.defeats);
     if (choice.defeats === computerChoice) {
+      consecutiveWins++;
       startConfetti();
+      if (consecutiveWins>1) {
+        resultText.textContent = ` ${consecutiveWins} 連勝中！🥳`;
+      } else {
       resultText.textContent = 'あなたの勝ちです';
+      }
       playerScoreNumber++;
       playerScoreEl.textContent = playerScoreNumber;
     } else {
       resultText.textContent = 'あなたの負けです';
       computerScoreNumber++;
+      consecutiveWins = 0; // reset consecutive wins
       computerScoreEl.textContent = computerScoreNumber;
     }
   }
@@ -90,7 +97,7 @@ function checkResult(playerChoice) {
 
 // passing player selection value and styling icons
 function select(playerChoice) {
-  console.log(playerChoice);
+  // console.log(playerChoice);
   checkResult(playerChoice);
   // add 'selected' and update playerChoice text
   switch (playerChoice) {
