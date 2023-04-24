@@ -66,6 +66,7 @@ function updateScore(playerChoice) {
   // console.log(playerChoice, computerChoice);
   if (playerChoice === computerChoice) {
     resultText.textContent = '引き分けです';
+    consecutiveWins = 0; // reset consecutive wins
   } else {
     const choice = choices[playerChoice];
     // console.log(choice.defeats);
